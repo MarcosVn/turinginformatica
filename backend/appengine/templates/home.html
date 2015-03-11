@@ -1,0 +1,271 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<body id="page-top" class="index">
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="intro-text">
+                <div class="intro-lead-in">Bem vindo ao nosso site!</div>
+                <div class="intro-heading">Encontre aqui a sua solução em TI</div>
+                <a href="#services" class="page-scroll btn btn-xl">Saiba como</a>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Section: Serviços -->
+    <section id="services">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Serviços</h2>
+                    <h3 class="section-subheading text-muted">Encontre aqui a sua solução.</h3>
+                </div>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Desenvolvemos sua aplicação</h4>
+                    <p class="text-muted">Transformamos seu negócio em uma aplicação física para o
+                        usuário final de acordo com o seu desejo.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-laptop fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Avaliamos e consertamos seu PC</h4>
+                    <p class="text-muted">Efetuamos análise e manutenção do seu <i>desktop,
+                         notebook, tablet</i> e/ou celular. Seja para formatação, remoção de vírus e/ou instalação de aplicativos.</p>
+                </div>
+                <div class="col-md-4">
+                    <span class="fa-stack fa-4x">
+                        <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                        <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                    </span>
+                    <h4 class="service-heading">Configuramos e garantimos a segurança da sua rede</h4>
+                    <p class="text-muted">Instalamos e configuramos sua rede seja na sua casa, escritório, apartamento, etc. Visamos ao máximo a segurança dos seus dados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+
+    <!--Section: Aprenda Aqui -->
+    <section id="portfolio" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Aprenda aqui</h2>
+                    <h3 class="section-subheading text-muted">Entre e inscreva-se nos nossos mini-cursos.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal1" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/img/portfolio/ux.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>UX & Design</h4>
+                        <p class="text-muted">O que não se fazer ao lidar com o usuário.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal3" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/img/portfolio/front.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Front-End</h4>
+                        <p class="text-muted">HTML, CSS e Javascript do 0.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal4" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/img/portfolio/rede.jpg" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>HNetwork</h4>
+                        <p class="text-muted">Hardware e Redes.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 portfolio-item">
+                    <a href="#portfolioModal6" class="portfolio-link" data-toggle="modal">
+                        <div class="portfolio-hover">
+                            <div class="portfolio-hover-content">
+                                <i class="fa fa-plus fa-3x"></i>
+                            </div>
+                        </div>
+                        <img src="../static/img/portfolio/programacao.png" class="img-responsive" alt="">
+                    </a>
+                    <div class="portfolio-caption">
+                        <h4>Lógica de Programação</h4>
+                        <p class="text-muted">Conceitos fundamentais de programação.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Sobre -->
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Sobre</h2>
+                    <h3 class="section-subheading text-muted">Saiba um pouco da nossa recente história.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="../static/img/about/1.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Novembro de 2014</h4>
+                                    <h4 class="subheading">Nossa aventura começa</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">Baseados em experiências de trabalhos anteriores juntos e com o surgimento de demandas para projetos, surge a ideia da fundação da Turing Informática!</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <img class="img-circle img-responsive" src="../static/img/about/3.jpg" alt="">
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4>Janeiro 2015</h4>
+                                    <h4 class="subheading">Primeiro projeto</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p class="text-muted">O primeiro projeto criado será para uma ONG atuante no Brasil
+                                        que trabalha especificamente com direitos do jovem.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-image">
+                                <h4>Faça parte
+                                    <br>da nossa
+                                    <br>história!</h4>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section: Dupla -->
+    <section id="team" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Dupla Dinâmica</h2>
+                    <h3 class="section-subheading text-muted">Saiba um pouco mais sobre nós.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="team-member">
+                        <img src="../static/img/team/1.jpg" class="img-responsive img-circle" alt="">
+                        <h4>Marcos Alves</h4>
+                        <p class="text-muted">Analista de Testes, aspirante a desenvolvedor web e entendedor de UX. </p>
+                        <ul class="list-inline social-buttons">
+                            <li><a href="http://www.facebook.com/profile.php?id=100004438717079"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="http://www.linkedin.com/profile/view?id=328024974"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="team-member">
+                        <img src="../static/img/team/3.jpg" class="img-responsive img-circle" alt="">
+                        <h4>Frederico Maciel</h4>
+                        <p class="text-muted">Assistente administrativo, político, músico e gerente de marketing.</p>
+                        <ul class="list-inline social-buttons">
+                            <li><a href="http://www.facebook.com/tai3k"><i class="fa fa-facebook"></i></a>
+                            </li>
+                            <li><a href="https://br.linkedin.com/in/tai3k"><i class="fa fa-linkedin"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <p class="large text-muted">Tentando sempre aprender para ensinar o pouco que sabemos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Contate-nos</h2>
+                    <h3 class="section-subheading text-muted-white">Mande sua sugestão, dúvida ou podemos ter um bate-papo.</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <form name="sentMessage" id="contactForm" novalidate>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Digite aqui seu nome" id="name" required data-validation-required-message="Por favor, insira seu nome.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" placeholder="Digite aqui seu email" id="email" required data-validation-required-message="Por favor, insira seu e-mail.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                                <div class="form-group">
+                                    <input type="tel" class="form-control" placeholder="Digite aqui seu telefone/celular" id="phone" required data-validation-required-message="Por favor, insira seu número.">
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Digite aqui sua mensagem" id="message" required data-validation-required-message="Por favor, insira uma mensagem."></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-12 text-center">
+                                <div id="success"></div>
+                                <button type="submit" class="btn btn-xl">Envie sua mensagem</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %} 
