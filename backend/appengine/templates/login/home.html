@@ -8,12 +8,9 @@
 {% endblock %}
 {% block body %}
     <div class="container">
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
-        <h1 class="text-center">{% trans %}Entre agora{% endtrans %}</h1>
+        <br/> <br/><br/><br/><br/><br/>
+
+        <h1 class="text-center">{% trans %}Login Options{% endtrans %}</h1>
         <br/>
         <br/>
         <br/>
@@ -21,11 +18,11 @@
         <div class="row">
             <div class="col-md-4 text-center">
                 <div class="well">
-                    <h2>E-mail</h2><br/>
+                    <h2>Email</h2><br/>
 
                     <form action="{{ login_passwordless_path }}" method="post">
                         <div class="input-group">
-                            <input type="email" name="email" placeholder="{% trans %}Digite seu email aqui{% endtrans %}"
+                            <input type="email" name="email" placeholder="{% trans %}Type your email{% endtrans %}"
                                    class="form-control"/>
       <span class="input-group-btn">
            <button class="btn btn-success" type="submit">Login</button>
@@ -81,17 +78,11 @@
             }
         }
 
-        
-
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '{{faceapp.app_id if faceapp}}',
-                cookie: true,  // enable cookies to allow the server to access
-                // the session
-                xfbml: true,  // parse social plugins on this page
-                version: 'v2.0' // use version 2.0
+        function fb_login() {
+            FB.login(statusChangeCallback, {
+                scope: 'public_profile,email'
             });
-        };
+        }
 
         // This function is called when someone finishes with the Login
         // Button.  See the onlogin handler attached to it in the sample
@@ -102,13 +93,15 @@
             });
         }
 
-
-        function fb_login() {
-            FB.login(statusChangeCallback, {
-                scope: 'public_profile,email'
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '{{faceapp.app_id if faceapp}}',
+                cookie: true,  // enable cookies to allow the server to access
+                // the session
+                xfbml: true,  // parse social plugins on this page
+                version: 'v2.0' // use version 2.0
             });
-        }
-
+        };
 
         // Load the SDK asynchronously
         (function (d, s, id) {
