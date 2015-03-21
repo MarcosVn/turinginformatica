@@ -10,7 +10,7 @@
     <div class="container">
         <br/> <br/><br/><br/><br/><br/>
 
-        <h1 class="text-center">{% trans %}Login Options{% endtrans %}</h1>
+        <h1 class="text-center">{% trans %}Login{% endtrans %}</h1>
         <br/>
         <br/>
         <br/>
@@ -18,15 +18,15 @@
         <div class="row">
             <div class="col-md-4 text-center">
                 <div class="well">
-                    <h2>Email</h2><br/>
+                    <h2>E-mail</h2><br/>
 
                     <form action="{{ login_passwordless_path }}" method="post">
                         <div class="input-group">
                             <input type="email" name="email" placeholder="{% trans %}Type your email{% endtrans %}"
                                    class="form-control"/>
-      <span class="input-group-btn">
-           <button class="btn btn-success" type="submit">Login</button>
-      </span>
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="submit">Login</button>
+        </span>
                         </div>
                         {{ csrf_input() }}
                     </form>
