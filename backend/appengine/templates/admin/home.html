@@ -5,23 +5,23 @@
     </br>
     </br>
     </br>
-    </br>
-    </br>
-    </br>
-    </br>
     <div class="container">
         <div class="row">
-            <h1>{% trans %}Administration Panel{% endtrans %}</h1>
+            <h1>{% trans %}Painel Administrativo{% endtrans %}</h1>
             <ul>
                 <li>
-                    <a href="{{ security_table_path }}">{% trans %}Security Paths Table{% endtrans %}</a>
+                    <a href="{{ security_table_path }}">{% trans %}Tabela de Paths (Seguros e Inseguros){% endtrans %}</a>
                 </li>
             </ul>
-            <h2>{% trans %} Configurations{% endtrans %}</h2>
+            </p>
+            <h2>{% trans %}Configurações Gerais{% endtrans %}</h2>
             <ul>
-                <li><a href="{{ permission_admin_path }}">{% trans %} User Permissions{% endtrans %}</a></li>
-                <li><a href="{{ facebook_admin_path }}">{% trans %}Facebook App Data{% endtrans %}</a></li>
-                <li><a href="{{ passwordless_admin_path }}">{% trans %}Passwordless App Data{% endtrans %}</a></li>
+                <li><a href="/acourses">Gerenciamento de Cursos</a></li>
+                <li><a href="/subjects">Gerenciamento de Matérias</a></li>
+                <li><a href="/articles">Gerenciamento de Artigos</a></li>
+                <li><a href="{{ permission_admin_path }}">{% trans %}Permissões de Usuário{% endtrans %}</a></li>
+                <li><a href="{{ facebook_admin_path }}">{% trans %}Facebook{% endtrans %}</a></li>
+                <li><a href="{{ passwordless_admin_path }}">{% trans %}Passwordless{% endtrans %}</a></li>
             </ul>
         </div>
     </div>

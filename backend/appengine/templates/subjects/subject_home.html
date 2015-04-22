@@ -1,0 +1,46 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<br><br><br><br><br><br>
+<div class="container">
+   <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+        <h2 align="center"> Gerenciamento de Matérias</h2>
+        <form action="{{ salvar_path }}" method="post">
+            {{ csrf_input() }}
+            {{ form_input('Nome','name','','') }}
+            {{ form_input('Atividades','activities','','') }}
+            <div align="center">
+                <button class="btn btn-log" type="submit">Criar</button>
+            </div>
+
+        </form>
+
+         <br><br>
+        <h3 align="center">Lista da(s) Matéria(s)</h3> <p>
+        <ol>
+            {% for s in subjects %}
+            <li>{{ s.name }}
+                <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                </a>
+                <form action="{{ s.deletar_path }}" method="post" style="display: inline">
+                    {{ csrf_input() }}
+                    <button class="btn btn-danger" style="margin-left: 10px">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </form>
+            </li>
+            {% endfor %}
+        </ol>
+
+
+
+    </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}
+
+

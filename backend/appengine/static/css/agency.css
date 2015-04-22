@@ -3,6 +3,10 @@ body {
     font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
+form {
+    width: a;
+}
+
 .text-muted {
     color: #777;
 }
@@ -36,7 +40,7 @@ a {
     color: #10698F;
 }
 
-a:hover,
+a:li,
 a:focus,
 a:active,
 a.active {
@@ -210,6 +214,32 @@ fieldset[disabled] .btn-xl.active {
     letter-spacing: 1px;
     color: #fff;
 }
+
+
+.btn-log {
+    color:white;
+    margin-left: 50px;
+    background: #10698f;
+    border-radius: 3px;
+}
+
+.btn-log:hover {
+    background: #498ECA !important;
+    color: #ffffff !important;
+}
+
+.btn-log:active {
+    background: #498ECA !important;
+    color: #ffffff !important;
+}
+
+.btn-log:checked{
+    background: #498ECA !important;
+    color: #ffffff !important;
+}
+
+
+
 
 .navbar-default .nav li a:hover,
 .navbar-default .nav li a:focus {

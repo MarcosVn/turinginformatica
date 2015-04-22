@@ -1,0 +1,44 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+<br><br><br><br><br><br>
+<div class="container">
+   <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+        <h2 align="center"> Gerenciamento de Artigos</h2>
+        <form action="{{ salvar_path }}" method="post">
+            {{ csrf_input() }}
+            {{ form_input('Título','title', '', '') }}
+            {{ form_input('Conteúdo','content', '', '') }}
+            {{ form_input('Autor', 'author', '', '') }}
+            {{ form_input('Imagem', 'img', '', '') }}
+
+            <div align="center">
+                <button class="btn btn-log" type="submit">Criar</button>
+            </div>
+        </form>
+        <br><br>
+        <h3 align="center">Lista do(s) Artigo(s)</h3> <p>
+        <ol>
+            {% for a in articles %}
+            <li >{{ a.title }}
+                <a class="btn btn-success" href="{{ a.edit_path }}" style="background: #10698F !important; margin-left: 10px">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                </a>
+                <form action="{{ a.deletar_path }}" method="post" style="display: inline">
+                    {{ csrf_input() }}
+                    <button class="btn btn-danger" style="margin-left: 10px">
+                        <i class="glyphicon glyphicon-trash"></i>
+                    </button>
+                </form>
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}
+
+

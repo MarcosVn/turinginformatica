@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+{% block body %}
+{% set article = article or None %}
+{% set erros = erros or None %}
+<br><br><br><br><br><br>
+<div class="container">
+   <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+        <h2 align="center"> Gerenciamento de Artigos</h2>
+        <form action="{{ salvar_path }}" method="post">
+            {{ csrf_input() }}
+            {{ form_input('Título','title', article.title, erros.title) }}
+            {{ form_input('Conteúdo','content', article.content, erros.content) }}
+            {{ form_input('Autor', 'author', article.author, erros.author) }}
+            {{ form_input('Imagem', 'img', article.img, erros.img) }}
+            {% if article.key  %}
+            <input type="hidden" name="article_id" value="{{ article.key.id() }}" />
+            {% endif %}
+            <div align="center">
+                <button class="btn btn-log" type="submit">Salvar Alterações</button>
+            </div>
+        </form>
+
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

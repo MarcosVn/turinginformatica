@@ -1,0 +1,28 @@
+{% extends 'base/base.html' %}
+
+{% block body %}
+{% set subject = subject or None %}
+{% set erros = erros or None %}
+<br><br><br><br><br><br>
+<div class="container">
+   <div class="row">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="well">
+        <h2 align="center"> Gerenciamento de Matérias</h2>
+        <form action="{{ salvar_path }}" method="post">
+            {{ csrf_input() }}
+            {{ form_input('Nome','name', subject.name, erros.name) }}
+            {{ form_input('Atividades','activities', subject.activities, erros.activities) }}
+            {% if subject.key  %}
+            <input type="hidden" name="subject_id" value="{{ subject.key.id() }}" />
+            {% endif %}
+            <div align="center">
+                <button class="btn btn-log" type="submit">Salvar Alterações</button>
+            </div>
+        </form>
+
+        </div>
+    </div>
+    </div>
+    </div>
+{% endblock %}

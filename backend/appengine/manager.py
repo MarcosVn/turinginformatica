@@ -970,7 +970,7 @@ def scaffold(app, model, *properties):
     _title('templates/home.html')
     print init_home_html(app, model)
 
-    _title('templates/form.html')
+    _title('templates/home.html')
     print init_form_html(app, model)
 
     init_test(app, model)
