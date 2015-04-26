@@ -9,16 +9,20 @@
         <h2 align="center"> Gerenciamento de Artigos</h2>
         <form action="{{ salvar_path }}" method="post">
             {{ csrf_input() }}
-            {{ form_input('Título','title', '', '') }}
-            {{ form_input('Conteúdo','content', '', '') }}
-            {{ form_input('Autor', 'author', '', '') }}
-            {{ form_input('Imagem', 'img', '', '') }}
+            {{ form_input('Título','title', '', '', 'text') }}
+            {{ form_input('Conteúdo','content', '', '', 'text') }}
+            {{ form_input('Autor', 'author', '', '', 'text') }}
+            {{ form_input('Imagem', 'img', '', '', 'file') }}
 
             <div align="center">
                 <button class="btn btn-log" type="submit">Criar</button>
             </div>
         </form>
         <br><br>
+        {% if not articles %}
+            <h4 align="center">Você ainda não possui artigos cadastrados</h4>
+        {% endif %}
+        {% if articles %}
         <h3 align="center">Lista do(s) Artigo(s)</h3> <p>
         <ol>
             {% for a in articles %}
@@ -33,8 +37,10 @@
                     </button>
                 </form>
             </li>
+            <br>
             {% endfor %}
         </ol>
+        {% endif %}
     </div>
     </div>
     </div>

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from subject.subject_model import Subject, SubjectForm
+from course.course_model import Subject, SubjectForm
 from config.template_middleware import TemplateResponse
 from routes import subjects
 from tekton.gae.middleware.redirect import RedirectResponse

@@ -6,42 +6,36 @@
    <div class="row">
     <div class="col-md-8 col-md-offset-2">
         <div class="well">
-        <h2 align="center"> Gerenciamento de Matérias</h2>
+        <h2 align="center"> Gerenciamento de Conta</h2>
         <form action="{{ salvar_path }}" method="post">
             {{ csrf_input() }}
-            {{ form_input('Nome','name','', '', 'text') }}
-            {{ form_input('Atividades','activities','','', 'text') }}
+            {{ form_input('Nome de Usuário','uusername', '', '', 'text') }}
+            {{ form_input('Senha','upassword', '', '', 'password') }}
+            {{ form_input('E-mail', 'uemail', '', '', 'email') }}
+            {{ form_input('Nome', 'uname', '', '', 'text') }}
+            {{ form_input('Data de Nascimento', 'ubirthday', '', '', 'date') }}
+
             <div align="center">
                 <button class="btn btn-log" type="submit">Criar</button>
             </div>
-
         </form>
-
         <br><br>
-        {% if not subjects %}
-            <h4 align="center">Você ainda não possui matérias cadastradas</h4>
-        {% endif %}
-
-        {% if subjects %}
-        <h3 align="center">Lista da(s) Matéria(s)</h3> <p>
+        {% if user %}
+        <h3 align="center">Dados da Conta</h3> <p>
         <ol>
-            {% for s in subjects %}
-            <li>{{ s.name }}
-                <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px">
+            <li >{{ user.uusername }}
+                <a class="btn btn-success" href="{{ user.edit_path }}" style="background: #10698F !important; margin-left: 10px">
                     <i class="glyphicon glyphicon-pencil"></i>
                 </a>
-                <form action="{{ s.deletar_path }}" method="post" style="display: inline">
+                <form action="{{ user.deletar_path }}" method="post" style="display: inline">
                     {{ csrf_input() }}
                     <button class="btn btn-danger" style="margin-left: 10px">
                         <i class="glyphicon glyphicon-trash"></i>
                     </button>
                 </form>
             </li>
-            <br>
-            {% endfor %}
+            {% endif %}
         </ol>
-        {% endif %}
-
     </div>
     </div>
     </div>

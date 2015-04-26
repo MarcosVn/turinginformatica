@@ -11,8 +11,8 @@
         <h2 align="center"> Gerenciamento de Matérias</h2>
         <form action="{{ salvar_path }}" method="post">
             {{ csrf_input() }}
-            {{ form_input('Nome','name', subject.name, erros.name) }}
-            {{ form_input('Atividades','activities', subject.activities, erros.activities) }}
+            {{ form_input('Nome','name', subject.name, erros.name, 'text') }}
+            {{ form_input('Atividades','activities', subject.activities, erros.activities, 'text') }}
             {% if subject.key  %}
             <input type="hidden" name="subject_id" value="{{ subject.key.id() }}" />
             {% endif %}

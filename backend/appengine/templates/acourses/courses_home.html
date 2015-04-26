@@ -9,16 +9,23 @@
         <h2 align="center"> Gerenciamento de Cursos</h2>
         <form action="{{ salvar_path }}" method="post">
         {{ csrf_input() }}
-        {{ form_input('Nome','name','','') }}
-        {{ form_input('Duração','duration','','') }}
-        {{ form_input('Matérias', 'subjects', '','') }}
+        {{ form_input('Nome','name','','', 'text') }}
+        {{ form_input('Duração','duration','','', 'text') }}
+        <label class="control-label">Matérias:&nbsp;&nbsp;</label><select name="subjects">
+            {% for sub in subjects %}
+                <option value="{{ sub.key.id() }}">{{ sub.name }}</option>
+            {% endfor %}
+        </select>
         <div align="center">
             <button class="btn btn-log" type="submit">Criar</button>
         </div>
 
         </form>
-
         <br><br>
+        {% if not courses %}
+        <h3 align="center">Você ainda não possui cursos cadastrados</h3>
+        {% endif %}
+        {% if courses %}
         <h3 align="center">Lista do(s) Curso(s)</h3>
         <br>
         <ol>
@@ -34,8 +41,10 @@
                     </button>
                 </form>
             </li>
+            <br>
             {% endfor %}
         </ol>
+        {% endif %}
     </div>
     </div>
     </div>

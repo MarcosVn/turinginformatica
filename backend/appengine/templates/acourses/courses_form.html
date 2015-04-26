@@ -10,9 +10,12 @@
         <h2 align="center"> Gerenciamento de Cursos</h2>
         <form action="{{ salvar_path }}" method="post">
             {{ csrf_input() }}
-            {{ form_input('Nome','name', course.name,erros.nome) }}
-            {{ form_input('Duração','duration', course.duration, erros.duracao) }}
-            {{ form_input('Matérias', 'subjects', course.subjects, erros.materias) }}
+            {{ form_input('Nome','name', course.name, erros.name, 'text') }}
+            {{ form_input('Duração','duration', course.duration, erros.duration, 'text') }}
+            <label class="control-label">Matérias:&nbsp;&nbsp;</label><select name="subjects">
+            {% for sub in subjects %}
+                <option value="{{ sub.key.id() }}">{{ sub.name }}</option>
+            {% endfor %}
             {% if course.key  %}
             <input type="hidden" name="course_id" value="{{ course.key.id() }}" />
             {% endif %}

@@ -3,7 +3,7 @@ from __future__ import absolute_import, unicode_literals
 
 from google.appengine.ext import ndb
 from config.template_middleware import TemplateResponse
-from course.course_model import Course
+from course.course_model import Course, Subject
 from gaecookie.decorator import no_csrf
 from gaepermission.decorator import permissions
 from permission_app.model import ADMIN
@@ -14,22 +14,31 @@ from tekton.router import to_path
 
 __author__ = 'marcos'
 
-@permissions(ADMIN)
+# @permissions(ADMIN)
 @no_csrf
-def index():
-    query = Course.query_ordenada_por_nome()
+def index(subject_selecionado = None):
+
     edit_path_base = to_path(edit)
     deletar_path_base = to_path(deletar)
-    courses = query.fetch()
+    ctx = {'subjects': Subject.query_ordenada_por_nome().fetch(),
+           'salvar_path': to_path(salvar)}
 
-    for course in courses:
+    if subject_selecionado is None:
+        ctx['courses'] = Course.query_ordenada_por_nome().fetch()
+        ctx['subject_selecionado'] = None
+
+
+    else:
+        ctx['subject_selecionado'] = Subject.get_by_id(int(subject_selecionado))
+        ctx['courses']= Course.query_ordenada_por_subjects(subject_selecionado).fetch()
+
+
+    for course in ctx['courses']:
         key = course.key
         key_id = key.id()
         course.edit_path = to_path(edit_path_base, key_id)
         course.deletar_path = to_path(deletar_path_base, key_id)
 
-    ctx = {'courses': courses,
-           'salvar_path': to_path(salvar)}
 
     return TemplateResponse(ctx, 'acourses/courses_home.html')
 

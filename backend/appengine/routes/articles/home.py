@@ -14,7 +14,7 @@ from tekton.router import to_path
 
 __author__ = 'marcos'
 
-@permissions(ADMIN)
+# @permissions(ADMIN)
 @no_csrf
 def index():
     query = Article.query_ordenada_por_nome()

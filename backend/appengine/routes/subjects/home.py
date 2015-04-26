@@ -2,7 +2,7 @@
 from __future__ import absolute_import, unicode_literals
 from google.appengine.ext import ndb
 from config.template_middleware import TemplateResponse
-from subject.subject_model import Subject
+from course.course_model import Subject
 from gaecookie.decorator import no_csrf
 from gaepermission.decorator import permissions
 from permission_app.model import ADMIN
@@ -13,7 +13,7 @@ from tekton.router import to_path
 
 __author__ = 'marcos'
 
-@permissions(ADMIN)
+# @permissions(ADMIN)
 @no_csrf
 def index():
     query = Subject.query_ordenada_por_nome()
