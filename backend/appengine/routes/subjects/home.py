@@ -17,10 +17,10 @@ __author__ = 'marcos'
 @no_csrf
 @login_not_required
 def index():
-    query = Subject.query_ordenada_por_nome()
+    query = Subject.query_ordenada_por_nome().fetch()
     edit_path_base = to_path(edit)
     deletar_path_base = to_path(deletar)
-    subjects = query.fetch()
+    subjects = query
     for s in subjects:
         key = s.key
         key_id = key.id()

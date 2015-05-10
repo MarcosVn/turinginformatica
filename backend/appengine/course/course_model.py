@@ -17,6 +17,11 @@ class Subject(ndb.Model):
     def query_ordenada_por_nome(cls):
         return cls.query().order(Subject.name)
 
+    @classmethod
+    def query_ordenada_por_id(cls):
+        return cls.query().order(Subject.get_by_id)
+
+
 class SubjectForm(ModelForm):
     _model_class = Subject
     _include = [Subject.name]

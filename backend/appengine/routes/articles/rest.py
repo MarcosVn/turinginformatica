@@ -1,5 +1,6 @@
 from __future__ import absolute_import, unicode_literals
-from article.article_model import ArticleForm
+from google.appengine.ext import ndb
+from article.article_model import ArticleForm, Article
 from distutils import log
 from gaecookie.decorator import no_csrf
 from gaepermission.decorator import login_not_required
@@ -7,6 +8,13 @@ from tekton.gae.middleware.json_middleware import JsonUnsecureResponse
 
 __author__ = 'marcos'
 
+@login_not_required
+@no_csrf
+def deletar(**subject_id):
+    key = ndb.Key(Article, int(subject_id["id"]))
+    key.delete()
+    dct = {'id': subject_id["id"]}
+    return JsonUnsecureResponse(dct)
 
 @login_not_required
 @no_csrf

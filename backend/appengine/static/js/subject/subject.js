@@ -5,14 +5,12 @@
 $(document).ready(function() {
     var name = $('#nameInput');
     var activities = $('#activitiesInput');
-    var records = $('ol');
+    var records = $('#ol').toggle();
     var salvar = $('#salvar');
-    var deletar = $('#deletar');
     var gerenciar = $('#gerenciar');
     var fields = $('#fields').find('input[type=text]');
-    var ajaxBtn = $('#ajax-save-gif');
-    records.toggle();
-    ajaxBtn.hide();
+    var ajaxBtn = $('#ajax-save-gif').hide();
+    var table = $('table');
 
     function clearAllFields() {
         fields.val('');
@@ -25,6 +23,24 @@ $(document).ready(function() {
         }
     }
 
+    function getId(id) {
+        return {
+            'id': id.val()
+        }
+    }
+
+    $(document).on('click', 'td button', function() {
+        var r = confirm("Deseja realmente remover este registro?");
+
+        if (r) {
+            $.post('/subjects/rest/deletar',
+                getId($(this))
+            ).success(function(dic) {
+                    $('tr[value='+dic["id"]+']').remove();
+                });
+        }
+    });
+
     salvar.click(function() {
         $('.has-error').removeClass('has-error');
         $('.help-block').empty();
@@ -33,7 +49,15 @@ $(document).ready(function() {
         $.post('/subjects/rest/salvar',
             getFields(),
             clearAllFields()
-        ).error(function(erro) {
+        ).success(function(success) {
+                var hj = new Date();
+                table.append('<tr value="'+success["id"]+'"> <td>'+success["name"]+
+                '</td> <td>' +success["activities"]+ '</td>'+
+                '<td>' +(hj.toLocaleDateString() +'&nbsp;&nbsp;'+ hj.toLocaleTimeString())+  '</td>'+
+                '<td> <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px"> <i class="glyphicon glyphicon-pencil"></i></a>'+
+                '</td> <td> <button class="btn btn-danger" value="'+success["id"]+'" style="margin-left: 10px"> <i class="glyphicon glyphicon-trash"></i> </button> </td>');
+
+            }).error(function(erro) {
                 for (propriedade in erro.responseJSON){
                     $('#'+propriedade+'-div').addClass('has-error');
                     $('#'+propriedade+'-span').text(erro.responseJSON[propriedade]);
@@ -42,14 +66,12 @@ $(document).ready(function() {
                 ajaxBtn.hide();
                 salvar.removeAttr('disabled');
             });
-
-    });
-
-    deletar.click(function() {
-
     });
 
     gerenciar.click(function(){
         records.slideToggle();
+        $(this).css({"color":"white"});
     });
 });
+
+

@@ -1,12 +1,20 @@
 from __future__ import absolute_import, unicode_literals
-from course.course_model import SubjectForm
+from google.appengine.ext import ndb
+from course.course_model import SubjectForm, Subject
 from distutils import log
 from gaecookie.decorator import no_csrf
-from gaepermission.decorator import login_required, login_not_required
+from gaepermission.decorator import login_not_required
 from tekton.gae.middleware.json_middleware import JsonUnsecureResponse
 
 __author__ = 'marcos'
 
+@login_not_required
+@no_csrf
+def deletar(**subject_id):
+    key = ndb.Key(Subject, int(subject_id["id"]))
+    key.delete()
+    dct = {'id': subject_id["id"]}
+    return JsonUnsecureResponse(dct)
 
 @login_not_required
 @no_csrf
@@ -21,3 +29,5 @@ def salvar(_resp, **propriedades):
     dct = form.fill_with_model(subject)
     log.info(dct)
     return JsonUnsecureResponse(dct)
+
+

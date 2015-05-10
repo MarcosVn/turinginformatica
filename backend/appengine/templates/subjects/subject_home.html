@@ -1,7 +1,6 @@
 {% extends 'base/base.html' %}
 {% block js %} <script src="/static/js/subject/subject.js"></script> {% endblock %}
 {% block body %}
-    <br><br><br><br><br><br>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -19,28 +18,35 @@
                     </div>
 
                     <br><br>
-                    <ol>
-                        {% if not subjects %}
-                            <h4 align="center">Você ainda não possui matérias cadastradas</h4>
-                        {% endif %}
+                    <div id="ol">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>{% trans %} Nome {% endtrans %}</th>
+                                <th>{% trans %} Atividades {% endtrans %}</th>
+                                <th>{% trans %} Criação {% endtrans %}</th>
+                            </tr>
+                            </thead>
 
-                        {% if subjects %}
-                            <h3 align="center">Lista da(s) Matéria(s)</h3> <p>
                             {% for s in subjects %}
-                                <li>{{ s.name }}
+                                <tr value="{{ s.key.id() }}">
+                                <td> {{ s.name }} </td>
+                                <td> {{ s.activities }} </td>
+                                <td> {{ s.criacao }} </td>
+                                <td>
                                     <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px">
                                         <i class="glyphicon glyphicon-pencil"></i>
                                     </a>
-                                    {{ csrf_input() }}
-                                    <button id="deletar" class="btn btn-danger" style="margin-left: 10px">
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" value="{{ s.key.id() }}" style="margin-left: 10px">
                                         <i class="glyphicon glyphicon-trash"></i>
                                     </button>
-                                </li>
-                                <br>
+                                </td>
                             {% endfor %}
-                            </ol>
-                        {% endif %}
-
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

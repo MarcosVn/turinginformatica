@@ -1,16 +1,20 @@
 from __future__ import absolute_import, unicode_literals
-
 from google.appengine.ext import ndb
-
-from course.course_model import CourseForm, Subject
+from course.course_model import CourseForm, Subject, Course
 from distutils import log
 from gaecookie.decorator import no_csrf
 from gaepermission.decorator import login_not_required
 from tekton.gae.middleware.json_middleware import JsonUnsecureResponse
 
-
 __author__ = 'marcos'
 
+@login_not_required
+@no_csrf
+def deletar(**course_id):
+    key = ndb.Key(Course, int(course_id["id"]))
+    key.delete()
+    dct = {'id': course_id["id"]}
+    return JsonUnsecureResponse(dct)
 
 @login_not_required
 @no_csrf

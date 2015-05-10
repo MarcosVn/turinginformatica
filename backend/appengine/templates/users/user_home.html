@@ -1,7 +1,6 @@
 {% extends 'base/base.html' %}
 {% block js %} <script src="/static/js/user/user.js"></script> {% endblock %}
 {% block body %}
-    <br><br><br><br><br><br>
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
@@ -22,20 +21,35 @@
                         </div>
                     </div>
                     <br><br>
-
-                    <ol>
-                        {% if user %}
-                            <h3 align="center">Dados da Conta</h3> <p>
-                            <li>{{ user.username }}
-                                <a class="btn btn-success" href="{{ user.edit_path }}" style="background: #10698F !important; margin-left: 10px">
-                                    <i class="glyphicon glyphicon-pencil"></i>
-                                </a>
-                                <button id="deletar" class="btn btn-danger" style="margin-left: 10px">
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                </button>
-                            </li>
-                        {% endif %}
-                    </ol>
+                    <div id="ol">
+                        <table class="table table-striped table-hover">
+                            <thead>
+                            <tr>
+                                <th>{% trans %} Username {% endtrans %}</th>
+                                <th>{% trans %} E-mail {% endtrans %}</th>
+                                <th>{% trans %} Nome {% endtrans %}</th>
+                                <th>{% trans %} Data de Nascimento {% endtrans %}</th>
+                            </tr>
+                            </thead>
+                                <tr>
+                                <td> {{ user.username }} </td>
+                                <td> {{ user.email }} </td>
+                                <td> {{ user.name }} </td>
+                                <td> {{ user.birthday }} </td>
+                                <td>
+                                    <a class="btn btn-success" href="{{ user.edit_path }}" style="background: #10698F !important; margin-left: 10px">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger" value="{{ user.key.id() }}" style="margin-left: 10px">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button>
+                                </td>
+                            {% endfor %}
+                            </tr>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
