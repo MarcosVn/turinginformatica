@@ -1,44 +1,44 @@
 {% extends 'base/base.html' %}
-
+{% block js %} <script src="/static/js/user/user.js"></script> {% endblock %}
 {% block body %}
-<br><br><br><br><br><br>
-<div class="container">
-   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <div class="well">
-        <h2 align="center"> Gerenciamento de Conta</h2>
-        <form action="{{ salvar_path }}" method="post">
-            {{ csrf_input() }}
-            {{ form_input('Nome de Usuário','uusername', '', '', 'text') }}
-            {{ form_input('Senha','upassword', '', '', 'password') }}
-            {{ form_input('E-mail', 'uemail', '', '', 'email') }}
-            {{ form_input('Nome', 'uname', '', '', 'text') }}
-            {{ form_input('Data de Nascimento', 'ubirthday', '', '', 'date') }}
+    <br><br><br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="well">
+                    <h2 align="center"> Gerenciamento de Conta</h2>
+                    <div id="fields">
+                        {{ csrf_input() }}
+                        {{ form_input('Nome de Usuário','username', '', '', 'text') }}
+                        {{ form_input('Senha','password', '', '', 'password') }}
+                        {{ form_input('E-mail', 'email', '', '', 'email') }}
+                        {{ form_input('Nome', 'name', '', '', 'text') }}
+                        {{ form_input('Data de Nascimento', 'birthday', '', '', 'date') }}
 
-            <div align="center">
-                <button class="btn btn-log" type="submit">Criar</button>
+                        <div align="center">
+                            <button id="salvar" class="btn btn-log">Criar</button>
+                            <img id="ajax-save-gif" src="/static/img/ajax.gif" />
+                            <button id="gerenciar" class="btn btn-log">Editar/Excluir</button>
+                        </div>
+                    </div>
+                    <br><br>
+
+                    <ol>
+                        {% if user %}
+                            <h3 align="center">Dados da Conta</h3> <p>
+                            <li>{{ user.username }}
+                                <a class="btn btn-success" href="{{ user.edit_path }}" style="background: #10698F !important; margin-left: 10px">
+                                    <i class="glyphicon glyphicon-pencil"></i>
+                                </a>
+                                <button id="deletar" class="btn btn-danger" style="margin-left: 10px">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </button>
+                            </li>
+                        {% endif %}
+                    </ol>
+                </div>
             </div>
-        </form>
-        <br><br>
-        {% if user %}
-        <h3 align="center">Dados da Conta</h3> <p>
-        <ol>
-            <li >{{ user.uusername }}
-                <a class="btn btn-success" href="{{ user.edit_path }}" style="background: #10698F !important; margin-left: 10px">
-                    <i class="glyphicon glyphicon-pencil"></i>
-                </a>
-                <form action="{{ user.deletar_path }}" method="post" style="display: inline">
-                    {{ csrf_input() }}
-                    <button class="btn btn-danger" style="margin-left: 10px">
-                        <i class="glyphicon glyphicon-trash"></i>
-                    </button>
-                </form>
-            </li>
-            {% endif %}
-        </ol>
-    </div>
-    </div>
-    </div>
+        </div>
     </div>
 {% endblock %}
 

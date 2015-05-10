@@ -1,49 +1,51 @@
 {% extends 'base/base.html' %}
-
+{% block js %} <script src="/static/js/article/article.js"></script> {% endblock %}
 {% block body %}
-<br><br><br><br><br><br>
-<div class="container">
-   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <div class="well">
-        <h2 align="center"> Gerenciamento de Artigos</h2>
-        <form action="{{ salvar_path }}" method="post">
-            {{ csrf_input() }}
-            {{ form_input('Título','title', '', '', 'text') }}
-            {{ form_input('Conteúdo','content', '', '', 'text') }}
-            {{ form_input('Autor', 'author', '', '', 'text') }}
-            {{ form_input('Imagem', 'img', '', '', 'file') }}
+    <br><br><br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="well">
+                    <h2 align="center"> Gerenciamento de Artigos</h2>
+                    <div id="fields">
+                        {{ csrf_input() }}
+                        {{ form_input('Título','title', '', '', 'text') }}
+                        {{ form_input('Conteúdo','content', '', '', 'text') }}
+                        {{ form_input('Autor', 'author', '', '', 'text') }}
+                        {{ form_input('Imagem', 'img', '', '', 'file') }}
+                    </div>
+                    <div align="center">
+                        <button id="salvar" class="btn btn-log">Criar</button>
+                        <img id="ajax-save-gif" src="/static/img/ajax.gif" />
+                        <button id="gerenciar" class="btn btn-log">Editar/Excluir</button>
+                    </div>
 
-            <div align="center">
-                <button class="btn btn-log" type="submit">Criar</button>
+                    <br><br>
+                    {% if not articles %}
+                        <h4 align="center">Você ainda não possui artigos cadastrados</h4>
+                    {% endif %}
+                    {% if articles %}
+                        <ol>
+                            <h3 align="center">Lista do(s) Artigo(s)</h3> <p>
+                            {% for a in articles %}
+                                <li >{{ a.title }}
+                                    <a class="btn btn-success" href="{{ a.edit_path }}" style="background: #10698F !important; margin-left: 10px">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    {#                <form action="{{ a.deletar_path }}" method="post" style="display: inline">#}
+                                    {#                    {{ csrf_input() }}#}
+                                    <button id="deletar" class="btn btn-danger" style="margin-left: 10px">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button>
+                                    {#                </form>#}
+                                </li>
+                                <br>
+                            {% endfor %}
+                        </ol>
+                    {% endif %}
+                </div>
             </div>
-        </form>
-        <br><br>
-        {% if not articles %}
-            <h4 align="center">Você ainda não possui artigos cadastrados</h4>
-        {% endif %}
-        {% if articles %}
-        <h3 align="center">Lista do(s) Artigo(s)</h3> <p>
-        <ol>
-            {% for a in articles %}
-            <li >{{ a.title }}
-                <a class="btn btn-success" href="{{ a.edit_path }}" style="background: #10698F !important; margin-left: 10px">
-                    <i class="glyphicon glyphicon-pencil"></i>
-                </a>
-                <form action="{{ a.deletar_path }}" method="post" style="display: inline">
-                    {{ csrf_input() }}
-                    <button class="btn btn-danger" style="margin-left: 10px">
-                        <i class="glyphicon glyphicon-trash"></i>
-                    </button>
-                </form>
-            </li>
-            <br>
-            {% endfor %}
-        </ol>
-        {% endif %}
-    </div>
-    </div>
-    </div>
+        </div>
     </div>
 {% endblock %}
 

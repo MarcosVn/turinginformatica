@@ -3,6 +3,7 @@ from __future__ import absolute_import, unicode_literals
 from course.course_model import Subject
 from config.template_middleware import TemplateResponse
 from gaecookie.decorator import no_csrf
+from gaepermission.decorator import login_not_required
 from routes import subjects
 from tekton.gae.middleware.redirect import RedirectResponse
 from tekton.router import to_path
@@ -10,12 +11,14 @@ from tekton.router import to_path
 __author__ = 'marcos'
 
 @no_csrf
+@login_not_required
 def index(subject_id):
     subject = Subject.get_by_id(int(subject_id))
     ctx={'subject': subject,
          'salvar_path': to_path(atualizar)}
     return TemplateResponse(ctx, 'subjects/subject_form.html')
 
+@login_not_required
 def atualizar(subject_id, name, activities):
     subject = Subject.get_by_id(int(subject_id))
     subject.name = name

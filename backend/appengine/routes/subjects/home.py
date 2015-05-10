@@ -4,7 +4,7 @@ from google.appengine.ext import ndb
 from config.template_middleware import TemplateResponse
 from course.course_model import Subject
 from gaecookie.decorator import no_csrf
-from gaepermission.decorator import permissions
+from gaepermission.decorator import permissions, login_not_required
 from permission_app.model import ADMIN
 from routes.subjects import edit
 from routes.subjects.new import salvar
@@ -15,6 +15,7 @@ __author__ = 'marcos'
 
 # @permissions(ADMIN)
 @no_csrf
+@login_not_required
 def index():
     query = Subject.query_ordenada_por_nome()
     edit_path_base = to_path(edit)
@@ -30,6 +31,7 @@ def index():
 
     return TemplateResponse(ctx, 'subjects/subject_home.html')
 
+@login_not_required
 def deletar(subject_id):
     key = ndb.Key(Subject, int(subject_id))
     key.delete()

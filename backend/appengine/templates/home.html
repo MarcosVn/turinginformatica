@@ -1,11 +1,14 @@
 {% extends 'base/base.html' %}
-    {% block lstpath %}
-        <li class="hidden"> <a href="#page-top"> </a> </li>
-        <li> <a class="page-scroll" href="#services">Serviços</a></li>
-        <li> <a class="page-scroll" href="#about">Sobre</a></li>
-        <li> <a class="page-scroll" href="#team">Equipe</a></li>
-        <li><a class="page-scroll" href="#contact">Contato</a></li>
-    {%  endblock %}
+{% block lstpath %}
+    <li class="hidden"> <a href="#page-top"> </a> </li>
+    <li> <a class="page-scroll" href="/admin">CRUD do Admin</a></li>
+    <li> <a class="page-scroll" href="#services">Serviços</a></li>
+    <li> <a class="page-scroll" href="#about">Sobre</a></li>
+    <li> <a class="page-scroll" href="#team">Equipe</a></li>
+    <li><a class="page-scroll" href="#contact">Contato</a></li>
+{%  endblock %}
+{% block js %}
+{% endblock %}
 {% block body %}
 
     <!-- Header -->
@@ -45,7 +48,7 @@
                     </span>
                     <h4 class="service-heading">Avaliamos e consertamos seu PC</h4>
                     <p class="text-muted">Efetuamos análise e manutenção do seu <i>desktop,
-                         notebook, tablet</i> e/ou celular. Seja para formatação, remoção de vírus e/ou instalação de aplicativos.</p>
+                        notebook, tablet</i> e/ou celular. Seja para formatação, remoção de vírus e/ou instalação de aplicativos.</p>
                 </div>
                 <div class="col-md-4">
                     <span class="fa-stack fa-4x">
@@ -199,6 +202,6 @@
                 </div>
             </div>
         </div>
- </section>
+    </section>
 {% endblock %}
 

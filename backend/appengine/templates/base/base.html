@@ -33,87 +33,88 @@
     <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
 
-    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/jquery/jquery.js"></script>
     <script src="/static/jquery/js/jquery.easing.min.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/cbpAnimatedHeader.js"></script>
-    <script src="/static/js/classie.js"></script>
-    <script src="/static/js/agency.js"></script>
+    <script src="/static/js/bootstrap/bootstrap.min.js"></script>
+    <script src="/static/js/agency/cbpAnimatedHeader.js"></script>
+    <script src="/static/js/agency/classie.js"></script>
+    <script src="/static/js/agency/agency.js"></script>
     <script src="/static/angular/js/angular.min.js"></script>
-
+    {#    <script src="/static/angular/js/app.js"></script>#}
     {% block css %}{% endblock %}
-    {% block js %}<script src="/static/js/jqBootstrapValidation.js"></script>{% endblock %}
+    {% block js %}<script src="/static/js/bootstrap/jqBootstrapValidation.js"></script>{% endblock %}
 </head>
-<body id="page-top" class="index" ng-app="">
-    <!-- Navigation -->
-   <nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand page-scroll" href="/#page-top">Turing Informática</a>
-            </div>
+<body id="page-top" class="index">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top navbar-shrink">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="/#page-top">Turing Informática</a>
+        </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
-                        {% block lstpath %}
-                            <li class="hidden"> <a href="/#page-top"> </a> </li>
-                            <li> <a class="page-scroll" href="/#services">Serviços</a></li>
-                            <li> <a class="page-scroll" href="/#about">Sobre</a></li>
-                            <li> <a class="page-scroll" href="/#team">Equipe</a></li>
-                            <li><a class="page-scroll" href="/#contact">Contato</a></li>
-                        {% endblock %}
-                            <li> <a class="page-scroll" href="/courses">Cursos</a></li>
-                            {% if _logged_user %}
-                                <li> <div class="dropdown">
-                                    <button style="margin-left: 5%; margin-top: 5%" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
-                                    data-toggle="dropdown">
-                                {{ _logged_user.name }}
-                                    <span class="caret"></span>
-                                    </button>
-                                <ul class="dropdown-menu" style="margin-right: -12px; margin-top: -0.6px" role="menu" aria-labelledby="dropdownMenu1">
-                                    <li role="presentation"><a style="color: #000000; margin-left: 15px" role="menuitem" tabindex="-1" href="/account">{% trans %}Minha Conta{% endtrans %}</a></li>
-                                    <li role="presentation" class="divider"></li>
-                                    <li role="presentation">
-                                        <form action="{{ _logout_path }}" method="post" class="text-center">
-                                            <button class="btn" style="background-color: #10698F; color: #ffffff">{% trans %}
-                                            Logout{% endtrans %}</button>
-                                            {{ csrf_input() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                                </div> </li>
-                        {% else %}
-                            <li> <a class="page-scroll btn-log" href="{{ _login_path }}">Login </a></li>
-                        {% endif %}
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                {% block lstpath %}
+                    <li class="hidden"> <a href="/#page-top"> </a> </li>
+                    <li> <a class="page-scroll" href="/admin">CRUD do Admin</a></li>
+                    <li> <a class="page-scroll" href="/#services">Serviços</a></li>
+                    <li> <a class="page-scroll" href="/#about">Sobre</a></li>
+                    <li> <a class="page-scroll" href="/#team">Equipe</a></li>
+                    <li><a class="page-scroll" href="/#contact">Contato</a></li>
+                {% endblock %}
+                <li> <a class="page-scroll" href="/courses">Cursos</a></li>
+                {% if _logged_user %}
+                    <li> <div class="dropdown">
+                        <button style="margin-left: 5%; margin-top: 5%" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1"
+                                data-toggle="dropdown">
+                            {{ _logged_user.name }}
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" style="margin-right: -12px; margin-top: -0.6px" role="menu" aria-labelledby="dropdownMenu1">
+                            <li role="presentation"><a style="color: #000000; margin-left: 15px" role="menuitem" tabindex="-1" href="/account">{% trans %}Minha Conta{% endtrans %}</a></li>
+                            <li role="presentation" class="divider"></li>
+                            <li role="presentation">
+                                <form action="{{ _logout_path }}" method="post" class="text-center">
+                                    <button class="btn" style="background-color: #10698F; color: #ffffff">{% trans %}
+                                        Logout{% endtrans %}</button>
+                                    {{ csrf_input() }}
+                                </form>
+                            </li>
+                        </ul>
+                    </div> </li>
+                {% else %}
+                    <li> <a class="page-scroll btn-log" href="{{ _login_path }}">Login </a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+</nav>
+{% block body %}{% endblock %}
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <span class="copyright">Copyright &copy; Turing Informática 2015</span>
+            </div>
+            <div class="col-md-4">
+                <ul class="list-inline social-buttons">
+                    <li><a href="https://www.facebook.com/pages/Turing-Inform%C3%A1tica/764263833610001"><i class="fa fa-facebook"></i></a>
+                    </li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                    </li>
                 </ul>
             </div>
         </div>
-
-    </nav>
-{% block body %}{% endblock %}
-<footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright &copy; Turing Informática 2015</span>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li><a href="https://www.facebook.com/pages/Turing-Inform%C3%A1tica/764263833610001"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
+    </div>
+</footer>
 </body>
 </html>

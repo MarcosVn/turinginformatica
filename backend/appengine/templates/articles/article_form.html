@@ -13,7 +13,7 @@
             {{ form_input('Título','title', article.title, erros.title, 'text') }}
             {{ form_input('Conteúdo','content', article.content, erros.content, 'text') }}
             {{ form_input('Autor', 'author', article.author, erros.author, 'text') }}
-            {{ form_input('Imagem', 'img', article.img, erros.img, 'text') }}
+{#            {{ form_input('Imagem', 'img', article.img, erros.img, 'file') }}#}
             {% if article.key  %}
             <input type="hidden" name="article_id" value="{{ article.key.id() }}" />
             {% endif %}

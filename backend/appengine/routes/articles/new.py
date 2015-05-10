@@ -2,11 +2,13 @@
 from __future__ import absolute_import, unicode_literals
 from article.article_model import Article, ArticleForm
 from config.template_middleware import TemplateResponse
+from gaepermission.decorator import login_not_required
 from routes import articles
 from tekton.gae.middleware.redirect import RedirectResponse
 
 __author__ = 'marcos'
 
+@login_not_required
 def salvar(**kwargs):
     form = ArticleForm(**kwargs)
     erros = form.validate()

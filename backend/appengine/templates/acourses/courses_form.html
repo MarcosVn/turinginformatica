@@ -1,30 +1,30 @@
 {% extends 'base/base.html' %}
 {% block body %}
-{% set course = course or None %}
-{% set erros = erros or None %}
-<br><br><br><br><br><br>
-<div class="container">
-   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <div class="well">
-        <h2 align="center"> Gerenciamento de Cursos</h2>
-        <form action="{{ salvar_path }}" method="post">
-            {{ csrf_input() }}
-            {{ form_input('Nome','name', course.name, erros.name, 'text') }}
-            {{ form_input('Duração','duration', course.duration, erros.duration, 'text') }}
-            <label class="control-label">Matérias:&nbsp;&nbsp;</label><select name="subjects">
-            {% for sub in subjects %}
-                <option value="{{ sub.key.id() }}">{{ sub.name }}</option>
-            {% endfor %}
-            {% if course.key  %}
-            <input type="hidden" name="course_id" value="{{ course.key.id() }}" />
-            {% endif %}
-            <div align="center">
-                <button class="btn btn-log" type="submit">Salvar Alterações</button>
+    {% set course = course or None %}
+    {% set erros = erros or None %}
+    <br><br><br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="well">
+                    <h2 align="center"> Gerenciamento de Cursos</h2>
+                    <form action="{{ salvar_path }}" method="post">
+                        {{ csrf_input() }}
+                        {{ form_input('Nome','name', course.name, erros.name, 'text') }}
+                        {{ form_input('Duração','duration', course.duration, erros.duration, 'text') }}
+                        <label class="control-label">Matérias:&nbsp;&nbsp;</label><select name="subjects">
+                        {% for sub in subjects %}
+                            <option value="{{ sub.key.id() }}">{{ sub.name }}</option>
+                        {% endfor %}
+                        {% if course.key  %}
+                            <input type="hidden" name="course_id" value="{{ course.key.id() }}" />
+                        {% endif %}
+                        <div align="center">
+                            <button class="btn btn-log" type="submit">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </form>
         </div>
-    </div>
-    </div>
     </div>
 {% endblock %}

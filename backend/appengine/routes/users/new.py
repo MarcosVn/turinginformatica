@@ -8,7 +8,6 @@ from tekton.gae.middleware.redirect import RedirectResponse
 
 __author__ = 'marcos'
 
-
 @login_not_required
 def salvar(**kwargs):
     form = UserForm(**kwargs)
@@ -21,4 +20,4 @@ def salvar(**kwargs):
 
     else:
         ctx = {'users': kwargs, 'erros': erros}
-        return TemplateResponse(ctx, 'users/user_home.html')
+        return TemplateResponse(ctx, 'users/user_form.html')

@@ -5,22 +5,26 @@ from gaeforms.ndb.form import ModelForm
 __author__ = 'marcos'
 
 class User(ndb.Model):
-    uusername = ndb.StringProperty(required=True)
-    upassword = ndb.StringProperty(required=True)
-    uemail = ndb.StringProperty(required=True)
-    uname = ndb.StringProperty(required=True)
-    ubirthday = ndb.StringProperty(required=True)
-    ucriacao = ndb.DateTimeProperty(auto_now_add=True)
+    username = ndb.StringProperty(required=True)
+    password = ndb.StringProperty(required=True)
+    email = ndb.StringProperty(required=True)
+    name = ndb.StringProperty(required=True)
+    birthday = ndb.StringProperty(required=True)
+    criacao = ndb.DateTimeProperty(auto_now_add=True)
+
 
     @classmethod
     def query_ordenada_por_nome(cls):
-        return cls.query().order(User.uusername)
+        return cls.query().order(User.username)
+
+    @classmethod
+    def query_ordenada_por_criacao(cls):
+        return cls.query().order(User.criacao)
 
 class UserForm(ModelForm):
     _model_class = User
-    _include = [User.uusername]
-    uusername = StringField(required=True)
-    upassword = StringField(required=True)
-    uemail = StringField(required=True)
-    uname = StringField(required=True)
-    ubirthday = StringField(required=True)
+    _include = [User.username]
+    password = StringField(required=True)
+    email = StringField(required=True)
+    name = StringField(required=True)
+    birthday = StringField(required=True)

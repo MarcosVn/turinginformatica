@@ -9,7 +9,7 @@ class Article(ndb.Model):
     title = ndb.StringProperty(required=True)
     content = ndb.StringProperty(required=True)
     author = ndb.StringProperty(required=True)
-    img = ndb.StringProperty(required=True)
+    img = ndb.BlobProperty()
     criacao = ndb.DateTimeProperty(auto_now_add=True)
 
     @classmethod
@@ -22,4 +22,3 @@ class ArticleForm(ModelForm):
     title = StringField(required=True)
     content = StringField(required=True)
     author = StringField(required=True)
-    img = StringField(required=True)

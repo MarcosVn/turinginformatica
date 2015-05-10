@@ -5,7 +5,7 @@ from google.appengine.ext import ndb
 from config.template_middleware import TemplateResponse
 from article.article_model import Article
 from gaecookie.decorator import no_csrf
-from gaepermission.decorator import permissions
+from gaepermission.decorator import permissions, login_not_required
 from permission_app.model import ADMIN
 from routes.articles import edit
 from routes.articles.new import salvar
@@ -16,6 +16,7 @@ __author__ = 'marcos'
 
 # @permissions(ADMIN)
 @no_csrf
+@login_not_required
 def index():
     query = Article.query_ordenada_por_nome()
     edit_path_base = to_path(edit)
@@ -31,6 +32,8 @@ def index():
 
     return TemplateResponse(ctx, 'articles/article_home.html')
 
+
+@login_not_required
 def deletar(article_id):
     key = ndb.Key(Article, int(article_id))
     key.delete()

@@ -1,53 +1,57 @@
 {% extends 'base/base.html' %}
+{% block js %}
+    <script src="/static/js/course/course.js"></script>
+{% endblock %}
 
 {% block body %}
-<br><br><br><br><br><br>
-<div class="container">
-   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <div class="well">
-        <h2 align="center"> Gerenciamento de Cursos</h2>
-        <form action="{{ salvar_path }}" method="post">
-        {{ csrf_input() }}
-        {{ form_input('Nome','name','','', 'text') }}
-        {{ form_input('Duração','duration','','', 'text') }}
-        <label class="control-label">Matérias:&nbsp;&nbsp;</label><select name="subjects">
-            {% for sub in subjects %}
-                <option value="{{ sub.key.id() }}">{{ sub.name }}</option>
-            {% endfor %}
-        </select>
-        <div align="center">
-            <button class="btn btn-log" type="submit">Criar</button>
+    <br><br><br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="well">
+                    <h2 align="center"> Gerenciamento de Cursos</h2>
+                    <div id="fields">
+                        {{ csrf_input() }}
+                        {{ form_input('Nome','name','','', 'text') }}
+                        {{ form_input('Duração','duration','','', 'text') }}
+                        <label class="control-label">Matérias:&nbsp;&nbsp;</label><select name="subjects">
+                        {% for sub in subjects %}
+                            <option value="{{ sub.key.id() }}">{{ sub.name }}</option>
+                        {% endfor %}
+                    </select>
+                    </div>
+                    <div align="center">
+                        <button id="salvar" class="btn btn-log">Criar</button>
+                        <img id="ajax-save-gif" src="/static/img/ajax.gif" />
+                        <button id="gerenciar" class="btn btn-log">Editar/Excluir</button>
+                    </div>
+                    <br><br>
+                    <ol>
+                        {% if not courses %}
+                            <h3 align="center">Você ainda não possui cursos cadastrados</h3>
+                        {% endif %}
+                        {% if courses %}
+                            <h3 align="center">Lista do(s) Curso(s)</h3>
+                            <br>
+                            {% for c in courses %}
+                                <li>{{ c.name }}
+                                    <a class="btn btn-success" href="{{ c.edit_path }}" style="background: #10698F !important; margin-left: 10px">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    {#                <form action="{{ c.deletar_path }}" method="post" style="display: inline">#}
+                                    {#                    {{ csrf_input() }}#}
+                                    <button id="excluir" class="btn btn-danger" style="margin-left: 10px">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button>
+                                    {#                </form>#}
+                                </li>
+                                <br>
+                            {% endfor %}
+                            </ol>
+                        {% endif %}
+                </div>
+            </div>
         </div>
-
-        </form>
-        <br><br>
-        {% if not courses %}
-        <h3 align="center">Você ainda não possui cursos cadastrados</h3>
-        {% endif %}
-        {% if courses %}
-        <h3 align="center">Lista do(s) Curso(s)</h3>
-        <br>
-        <ol>
-            {% for c in courses %}
-            <li>{{ c.name }}
-                <a class="btn btn-success" href="{{ c.edit_path }}" style="background: #10698F !important; margin-left: 10px">
-                    <i class="glyphicon glyphicon-pencil"></i>
-                </a>
-                <form action="{{ c.deletar_path }}" method="post" style="display: inline">
-                    {{ csrf_input() }}
-                    <button class="btn btn-danger" style="margin-left: 10px">
-                        <i class="glyphicon glyphicon-trash"></i>
-                    </button>
-                </form>
-            </li>
-            <br>
-            {% endfor %}
-        </ol>
-        {% endif %}
-    </div>
-    </div>
-    </div>
     </div>
 {% endblock %}
 

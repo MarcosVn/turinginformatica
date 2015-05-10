@@ -1,50 +1,49 @@
 {% extends 'base/base.html' %}
-
+{% block js %} <script src="/static/js/subject/subject.js"></script> {% endblock %}
 {% block body %}
-<br><br><br><br><br><br>
-<div class="container">
-   <div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <div class="well">
-        <h2 align="center"> Gerenciamento de Matérias</h2>
-        <form action="{{ salvar_path }}" method="post">
-            {{ csrf_input() }}
-            {{ form_input('Nome','name','', '', 'text') }}
-            {{ form_input('Atividades','activities','','', 'text') }}
-            <div align="center">
-                <button class="btn btn-log" type="submit">Criar</button>
+    <br><br><br><br><br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="well">
+                    <h2 align="center"> Gerenciamento de Matérias</h2>
+                    <div id="fields">
+                        {{ csrf_input() }}
+                        {{ form_input('Nome','name','', '', 'text') }}
+                        {{ form_input('Atividades','activities','','', 'text') }}
+                        <div align="center">
+                            <button id="salvar" class="btn btn-log">Criar</button>
+                            <img id="ajax-save-gif" src="/static/img/ajax.gif" />
+                            <button id="gerenciar" class="btn btn-log">Editar/Excluir</button>
+                        </div>
+                    </div>
+
+                    <br><br>
+                    <ol>
+                        {% if not subjects %}
+                            <h4 align="center">Você ainda não possui matérias cadastradas</h4>
+                        {% endif %}
+
+                        {% if subjects %}
+                            <h3 align="center">Lista da(s) Matéria(s)</h3> <p>
+                            {% for s in subjects %}
+                                <li>{{ s.name }}
+                                    <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px">
+                                        <i class="glyphicon glyphicon-pencil"></i>
+                                    </a>
+                                    {{ csrf_input() }}
+                                    <button id="deletar" class="btn btn-danger" style="margin-left: 10px">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </button>
+                                </li>
+                                <br>
+                            {% endfor %}
+                            </ol>
+                        {% endif %}
+
+                </div>
             </div>
-
-        </form>
-
-        <br><br>
-        {% if not subjects %}
-            <h4 align="center">Você ainda não possui matérias cadastradas</h4>
-        {% endif %}
-
-        {% if subjects %}
-        <h3 align="center">Lista da(s) Matéria(s)</h3> <p>
-        <ol>
-            {% for s in subjects %}
-            <li>{{ s.name }}
-                <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px">
-                    <i class="glyphicon glyphicon-pencil"></i>
-                </a>
-                <form action="{{ s.deletar_path }}" method="post" style="display: inline">
-                    {{ csrf_input() }}
-                    <button class="btn btn-danger" style="margin-left: 10px">
-                        <i class="glyphicon glyphicon-trash"></i>
-                    </button>
-                </form>
-            </li>
-            <br>
-            {% endfor %}
-        </ol>
-        {% endif %}
-
-    </div>
-    </div>
-    </div>
+        </div>
     </div>
 {% endblock %}
 

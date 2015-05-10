@@ -11,19 +11,17 @@ from routes.users.new import salvar
 from tekton.gae.middleware.redirect import RedirectResponse
 from tekton.router import to_path
 
-
 __author__ = 'marcos'
-
 
 @no_csrf
 @login_not_required
 def index():
-    query = User.query_ordenada_por_nome()
+    query = User.query_ordenada_por_criacao()
     edit_path_base = to_path(edit)
     deletar_path_base = to_path(deletar)
     user = query.fetch()
-    if len(list(user)) >= 1:
-        user = user[0]
+    if len(user) >= 1:
+        user = user[len(user)-1]
         key = user.key
         key_id = key.id()
         user.edit_path = to_path(edit_path_base, key_id)

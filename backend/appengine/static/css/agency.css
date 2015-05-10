@@ -248,16 +248,14 @@ fieldset[disabled] .btn-xl.active {
     color: #ffffff !important;
 }
 
-.btn-log:active {
+.btn .btn-log:active,
+.btn .btn-log:checked,
+.btn .btn-log:focus,
+.btn .btn-log:visited,
+.btn .btn-log:active:focus {
     background: #498ECA !important;
     color: #ffffff !important;
 }
-
-.btn-log:checked{
-    background: #498ECA !important;
-    color: #ffffff !important;
-}
-
 
 
 
