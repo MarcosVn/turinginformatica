@@ -9,11 +9,28 @@
                     <div id="fields">
                         {{ csrf_input() }}
                         {{ form_input('Nome','name','', '', 'text') }}
-                        {{ form_input('Atividades','activities','','', 'text') }}
+                        {{ form_input('Atividades','activities','', '', 'text') }}
+                        <label class="control-label">Cursos:&nbsp;&nbsp;</label>
+                        <select name="courses" style="margin-bottom: 50px;">
+                            {% for course in courses %}
+                                <option value="{{ course.key.id() }}">{{ course.name }}</option>
+                            {% endfor %}
+                        </select>
+
                         <div align="center">
                             <button id="salvar" class="btn btn-log">Criar</button>
+
+                            <h3>Lista de Matérias {{ 'do curso '+course_selecionado.name if course_selecionado}} </h3>
+                            <form action="{{ pesquisa_path }}" style="margin-bottom: 100px">
+                               <select name="course_selecionado">
+                                   {% for course in courses %}
+                                       <option value="{{ course.key.id() }}" {{ 'selected="selected"' | safe if course == course_selecionado }}>{{ course.name }}</option>
+                                   {% endfor %}
+
+                               </select>
+                               <button id="gerenciar" type="submit" class="btn btn-log">Pesquisar</button>
+                            </form>
                             <img id="ajax-save-gif" src="/static/img/ajax.gif" />
-                            <button id="gerenciar" class="btn btn-log">Editar/Excluir</button>
                         </div>
                     </div>
 
@@ -23,8 +40,8 @@
                             <thead>
                             <tr>
                                 <th>{% trans %} Nome {% endtrans %}</th>
-                                <th>{% trans %} Atividades {% endtrans %}</th>
-                                <th>{% trans %} Criação {% endtrans %}</th>
+                                <th>{% trans %} Plano de Atividades {% endtrans %}</th>
+                                <th>{% trans %} Curso {% endtrans %} </th>
                             </tr>
                             </thead>
 
@@ -32,7 +49,6 @@
                                 <tr value="{{ s.key.id() }}">
                                 <td> {{ s.name }} </td>
                                 <td> {{ s.activities }} </td>
-                                <td> {{ s.criacao }} </td>
                                 <td>
                                     <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px">
                                         <i class="glyphicon glyphicon-pencil"></i>

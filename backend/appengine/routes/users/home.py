@@ -18,15 +18,12 @@ __author__ = 'marcos'
 def index():
     query = User.query_ordenada_por_criacao()
     edit_path_base = to_path(edit)
-    deletar_path_base = to_path(deletar)
     user = query.fetch()
     if len(user) >= 1:
         user = user[len(user)-1]
         key = user.key
         key_id = key.id()
         user.edit_path = to_path(edit_path_base, key_id)
-        user.deletar_path = to_path(deletar_path_base, key_id)
-
 
     ctx = {'user': user,
            'salvar_path': to_path(salvar)}

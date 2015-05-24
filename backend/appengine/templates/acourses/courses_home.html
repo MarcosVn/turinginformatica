@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 {% block js %}
-    <script src="/static/js/course/course.js"></script>
+    <script src="/static/js/course/course.js" xmlns="http://www.w3.org/1999/html"></script>
 {% endblock %}
 
 {% block body %}
@@ -13,17 +13,12 @@
                         {{ csrf_input() }}
                         {{ form_input('Nome','name','','', 'text') }}
                         {{ form_input('Duração','duration','','', 'text') }}
-                        <label class="control-label">Matérias:&nbsp;&nbsp;</label>
-                        <select name="subjects">
-                            {% for sub in subjects %}
-                                <option value="{{ sub.key.id() }}">{{ sub.name }}</option>
-                            {% endfor %}
-                        </select>
+                        {{ form_input('Plano de Ensino', 'educationProject', '','', 'text') }}
                     </div>
                     <div align="center">
                         <button id="salvar" class="btn btn-log">Criar</button>
                         <img id="ajax-save-gif" src="/static/img/ajax.gif" />
-                        <button id="gerenciar" class="btn btn-log">Editar/Excluir</button>
+                        <button id="gerenciar" class="btn btn-log">Consultar/Editar/Excluir</button>
                     </div>
                     <br><br>
 
@@ -33,7 +28,7 @@
                             <tr>
                                 <th>{% trans %} Nome {% endtrans %}</th>
                                 <th>{% trans %} Duração {% endtrans %}</th>
-                                <th>{% trans %} Criação {% endtrans %}</th>
+                                <th>{% trans %} Plano de Ensino {% endtrans %}</th>
                             </tr>
                             </thead>
 
@@ -41,7 +36,6 @@
                                 <tr value="{{ c.key.id() }}">
                                     <td> {{ c.name }} </td>
                                     <td> {{ c.duration }} </td>
-                                    <td> {{ c.criacao }} </td>
                                     <td>
                                         <a class="btn btn-success" href="{{ c.edit_path }}" style="background: #10698F !important; margin-left: 10px">
                                             <i class="glyphicon glyphicon-pencil"></i>

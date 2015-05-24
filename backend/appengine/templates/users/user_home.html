@@ -21,7 +21,12 @@
                         </div>
                     </div>
                     <br><br>
+
                     <div id="ol">
+                        {% if not user %}
+                            <h3 align="center">Você ainda não se cadastrou</h3>
+                        {% endif %}
+                        {% if user %}
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
@@ -46,8 +51,8 @@
                                         <i class="glyphicon glyphicon-trash"></i>
                                     </button>
                                 </td>
-                            {% endfor %}
                             </tr>
+                        {% endif %}
                         </table>
                     </div>
                 </div>

@@ -5,13 +5,16 @@ $(document).ready(function() {
     var title = $("#titleInput");
     var content = $("#contentInput");
     var author = $("#authorInput");
-    var records = $('#ol').toggle();
+    var records = $('#ol');
     var salvar = $('#salvar');
     var gerenciar = $('#gerenciar');
     var fields = $('#fields').find('input[type=text]');
-    var ajaxBtn = $('#ajax-save-gif').hide();
+    var ajaxBtn = $('#ajax-save-gif');
     var table = $('table');
 
+    records.toggle();
+    ajaxBtn.hide();
+    
     function clearAllInputs() {
         fields.val('');
     }
@@ -48,14 +51,14 @@ $(document).ready(function() {
         salvar.attr('disabled', 'disabled');
         ajaxBtn.show("slow");
         $.post('/articles/rest/salvar',
-            getFields(),
-            clearAllInputs()
+            getFields()
         ).success(function(dct) {
                 table.append('<tr value="'+dct["id"]+'"> <td>'+dct["title"]+
                 '</td> <td>' +dct["content"]+ '</td>'+
                 '<td>' +dct["author"]+ '</td>'+
                 '<td> <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px"> <i class="glyphicon glyphicon-pencil"></i></a>'+
                 '</td> <td> <button class="btn btn-danger" value="'+dct["id"]+'" style="margin-left: 10px"> <i class="glyphicon glyphicon-trash"></i> </button> </td>');
+                clearAllInputs();
 
             }).error(function(erro) {
                 for (propriedade in erro.responseJSON){

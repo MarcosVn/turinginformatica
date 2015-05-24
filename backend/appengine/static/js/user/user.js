@@ -8,12 +8,15 @@ $(document).ready(function() {
     var email = $('#emailInput');
     var name = $('#nameInput');
     var birthday = $('#birthdayInput');
-    var records = $('#ol').toggle();
+    var records = $('#ol');
     var salvar = $('#salvar');
-    var deletar = $('#deletar');
     var gerenciar = $('#gerenciar');
     var fields = $('#fields').find('input');
-    var ajaxBtn = $('#ajax-save-gif').hide();
+    var ajaxBtn = $('#ajax-save-gif');
+    var table = $('table');
+
+    records.toggle();
+    ajaxBtn.hide();
 
     function clearAllFields() {
         fields.val('');
@@ -35,6 +38,19 @@ $(document).ready(function() {
         }
     }
 
+    $(document).on('click', 'td button', function() {
+        var r = confirm("Deseja realmente remover este registro?");
+
+        if (r) {
+            $.post('/users/rest/deletar',
+                getId($(this))
+            ).success(function(dic) {
+                    $('tr[value='+dic["id"]+']').remove();
+                });
+        }
+    });
+
+
     salvar.click(function() {
         $('.has-error').removeClass('has-error');
         $('.help-block').empty();
@@ -42,14 +58,15 @@ $(document).ready(function() {
         ajaxBtn.show("slow");
 
         $.post('/users/rest/salvar',
-            getFields(),
-            clearAllFields()
+            getFields()
+
         ).success(function(dct) {
                 table.append('<tr value="'+dct["id"]+'"> <td>'+dct["username"]+
                 '</td> <td>' +dct["email"]+ '</td>'+
                 '<td>' +dct["name"]+ '</td> <td>'+ dct["birthday"]+
                 '<td> <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px"> <i class="glyphicon glyphicon-pencil"></i></a>'+
                 '</td> <td> <button class="btn btn-danger" value="'+dct["id"]+'" style="margin-left: 10px"> <i class="glyphicon glyphicon-trash"></i> </button> </td>');
+                clearAllFields();
             })
             .error(function(erro) {
                 for (propriedade in erro.responseJSON){
@@ -61,7 +78,6 @@ $(document).ready(function() {
                 salvar.removeAttr('disabled');
             });
     });
-
 
     gerenciar.click(function() {
        records.slideToggle();

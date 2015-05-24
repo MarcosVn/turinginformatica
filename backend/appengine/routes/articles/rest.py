@@ -18,6 +18,15 @@ def deletar(**subject_id):
 
 @login_not_required
 @no_csrf
+def listar():
+    articles = Article.query_ordenada_por_nome().fetch()
+    form= ArticleForm()
+    articles = [form.fill_with_model(article) for article in articles]
+    return JsonUnsecureResponse(articles)
+
+
+@login_not_required
+@no_csrf
 def salvar(_resp, **propriedades):
     form = ArticleForm(**propriedades)
     erros = form.validate()

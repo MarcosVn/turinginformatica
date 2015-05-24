@@ -5,12 +5,14 @@
 $(document).ready(function() {
     var name = $('#nameInput');
     var activities = $('#activitiesInput');
-    var records = $('#ol').toggle();
+    var records = $('#ol');
     var salvar = $('#salvar');
     var gerenciar = $('#gerenciar');
     var fields = $('#fields').find('input[type=text]');
-    var ajaxBtn = $('#ajax-save-gif').hide();
+    var ajaxBtn = $('#ajax-save-gif');
     var table = $('table');
+    ajaxBtn.hide();
+
 
     function clearAllFields() {
         fields.val('');
@@ -19,7 +21,8 @@ $(document).ready(function() {
     function getFields() {
         return {
             'name': name.val(),
-            'activities': activities.val()
+            'activities': activities.val(),
+            'course': $('option:selected').val()
         }
     }
 
@@ -47,16 +50,13 @@ $(document).ready(function() {
         salvar.attr('disabled', 'disabled');
         ajaxBtn.show("slow");
         $.post('/subjects/rest/salvar',
-            getFields(),
-            clearAllFields()
+            getFields()
         ).success(function(success) {
-                var hj = new Date();
                 table.append('<tr value="'+success["id"]+'"> <td>'+success["name"]+
                 '</td> <td>' +success["activities"]+ '</td>'+
-                '<td>' +(hj.toLocaleDateString() +'&nbsp;&nbsp;'+ hj.toLocaleTimeString())+  '</td>'+
-                '<td> <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px"> <i class="glyphicon glyphicon-pencil"></i></a>'+
+                '</td><td> <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px"> <i class="glyphicon glyphicon-pencil"></i></a>'+
                 '</td> <td> <button class="btn btn-danger" value="'+success["id"]+'" style="margin-left: 10px"> <i class="glyphicon glyphicon-trash"></i> </button> </td>');
-
+                clearAllFields();
             }).error(function(erro) {
                 for (propriedade in erro.responseJSON){
                     $('#'+propriedade+'-div').addClass('has-error');
@@ -69,7 +69,6 @@ $(document).ready(function() {
     });
 
     gerenciar.click(function(){
-        records.slideToggle();
         $(this).css({"color":"white"});
     });
 });

@@ -17,29 +17,18 @@ __author__ = 'marcos'
 # @permissions(ADMIN)
 @no_csrf
 @login_not_required
-def index(subject_selecionado=None):
-
+def index():
+    query = Course.query_ordenada_por_nome().fetch()
     edit_path_base = to_path(edit)
     deletar_path_base = to_path(deletar)
-    ctx = {'subjects': Subject.query_ordenada_por_nome().fetch(),
-           'salvar_path': to_path(salvar)}
-
-    if subject_selecionado is None:
-        ctx['courses'] = Course.query_ordenada_por_nome().fetch()
-        ctx['subject_selecionado'] = None
-
-
-    else:
-        ctx['subject_selecionado'] = Subject.get_by_id(int(subject_selecionado))
-        ctx['courses']= Course.query_ordenada_por_subjects(subject_selecionado).fetch()
-
-
-    for course in ctx['courses']:
+    courses = query
+    for course in courses:
         key = course.key
         key_id = key.id()
         course.edit_path = to_path(edit_path_base, key_id)
         course.deletar_path = to_path(deletar_path_base, key_id)
-
+    ctx = {'salvar_path': to_path(salvar),
+           'courses': courses}
 
     return TemplateResponse(ctx, 'acourses/courses_home.html')
 
