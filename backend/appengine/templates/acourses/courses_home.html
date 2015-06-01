@@ -1,53 +1,81 @@
 {% extends 'base/base.html' %}
 {% block js %}
-    <script src="/static/js/course/course.js" xmlns="http://www.w3.org/1999/html"></script>
+    <script src="/static/course/js/course.js"></script>
+    <script type="text/javascript">
+
+        var rest = angular.module('rest', []);
+        var cursoApp = angular.module('cursoApp', ['cursoModulo']);
+
+        rest.factory('CursoApi', function($http) {
+            return {
+                salvar: function(curso) {
+                    return $http.post('acourses/rest/salvar', curso);
+                },
+
+                deletar: function (id) {
+                    return $http.post('acourses/rest/deletar', {'id': id});
+                },
+
+                editar: function(curso) {
+                    return $http.post('acourses/rest/editar', {'course_id': curso.id, 'name': curso.name, 'duration': curso.duration, 'educationProject': curso.educationProject});
+                }
+            };
+        });
+
+        cursoApp.controller('courseController', function courseController($scope) {
+            $scope.gerenciarFlag = false;
+            $scope.curso = {name: '', duration: '', educationProject: ''};
+            $scope.cursoLista = {{ courses | safe }};
+
+
+            $scope.toggleGerenciar = function() {
+                $scope.gerenciarFlag = !$scope.gerenciarFlag;
+            };
+
+            $scope.adicionarCurso = function (curso) {
+                $scope.cursoLista.unshift(curso);
+            };
+
+            $scope.removerCurso = function(curso) {
+                var cursoLista = $scope.cursoLista;
+                for(var c = 0; c < cursoLista.length; c++) {
+                    if(curso.id == cursoLista[c].id) {
+                       cursoLista.splice(c, 1); break;
+                    }
+                }
+            };
+
+
+        });
+    </script>
 {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container" ng-controller="courseController" ng-app="cursoApp">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-2" >
                 <div class="well">
-                    <h2 align="center"> Gerenciamento de Cursos</h2>
-                    <div id="fields">
-                        {{ csrf_input() }}
-                        {{ form_input('Nome','name','','', 'text') }}
-                        {{ form_input('Duração','duration','','', 'text') }}
-                        {{ form_input('Plano de Ensino', 'educationProject', '','', 'text') }}
-                    </div>
+                    <cursoform course="curso" name-label="Nome" duration-label="Duração" plan-label="Plano de Ensino" save-complete="adicionarCurso(curso)">
+                    </cursoform>
                     <div align="center">
-                        <button id="salvar" class="btn btn-log">Criar</button>
-                        <img id="ajax-save-gif" src="/static/img/ajax.gif" />
-                        <button id="gerenciar" class="btn btn-log">Consultar/Editar/Excluir</button>
+                        <button style="margin-top: 20px;" class="btn btn-log" ng-click="toggleGerenciar()">Consultar/Editar/Excluir</button>
                     </div>
                     <br><br>
 
-                    <div id="ol">
+                    <div id="ol" ng-show="gerenciarFlag">
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
                                 <th>{% trans %} Nome {% endtrans %}</th>
                                 <th>{% trans %} Duração {% endtrans %}</th>
                                 <th>{% trans %} Plano de Ensino {% endtrans %}</th>
+                                <th></th>
+                                <th></th>
                             </tr>
                             </thead>
-
-                            {% for c in courses %}
-                                <tr value="{{ c.key.id() }}">
-                                    <td> {{ c.name }} </td>
-                                    <td> {{ c.duration }} </td>
-                                    <td>
-                                        <a class="btn btn-success" href="{{ c.edit_path }}" style="background: #10698F !important; margin-left: 10px">
-                                            <i class="glyphicon glyphicon-pencil"></i>
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger" value="{{ c.key.id() }}" style="margin-left: 10px">
-                                            <i class="glyphicon glyphicon-trash"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                            {% endfor %}
+                                <tbody>
+                                    <tr linhatabela ng-repeat="curso in cursoLista" course="curso" delete-complete="removerCurso(curso)"></tr>
+                                </tbody>
                         </table>
                     </div>
                 </div>

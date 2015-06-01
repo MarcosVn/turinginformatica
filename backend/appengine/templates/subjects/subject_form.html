@@ -1,9 +1,8 @@
 {% extends 'base/base.html' %}
 
 {% block body %}
-{% set subject = subject or None %}
 {% set erros = erros or None %}
-<br><br><br><br><br><br>
+{% set subject = subject or None %}
 <div class="container">
    <div class="row">
     <div class="col-md-8 col-md-offset-2">
@@ -13,6 +12,13 @@
             {{ csrf_input() }}
             {{ form_input('Nome','name', subject.name, erros.name, 'text') }}
             {{ form_input('Atividades','activities', subject.activities, erros.activities, 'text') }}
+            <span>Curso:&nbsp;&nbsp; </span>
+            <select style="margin-bottom: 50px;">
+                {% for course in courses %}
+                    <option value="{{ course.key.id() }}">{{ course.name }}</option>
+                {% endfor %}
+            </select>
+
             {% if subject.key  %}
             <input type="hidden" name="subject_id" value="{{ subject.key.id() }}" />
             {% endif %}

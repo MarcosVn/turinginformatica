@@ -16,17 +16,16 @@ __author__ = 'marcos'
 def index(course_id):
     course = Course.get_by_id(int(course_id))
     ctx = {'course': course,
-           'subjects': Subject.query_ordenada_por_nome().fetch(),
            'salvar_path': to_path(atualizar)}
     return TemplateResponse(ctx, 'acourses/courses_form.html')
 
 
 @login_not_required
-def atualizar(course_id, name, duration, subjects):
+def atualizar(course_id, name, duration, educationProject):
     course = Course.get_by_id(int(course_id))
     course.name = name
     course.duration = duration
-    course.subjects = ndb.Key(Subject, int(subjects))
+    course.educationProject = educationProject
     course.put()
     return RedirectResponse(acourses)
 

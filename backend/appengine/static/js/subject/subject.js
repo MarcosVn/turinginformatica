@@ -11,6 +11,8 @@ $(document).ready(function() {
     var fields = $('#fields').find('input[type=text]');
     var ajaxBtn = $('#ajax-save-gif');
     var table = $('table');
+    var lst = $('#lst');
+    var pesq = $('#pesq');
     ajaxBtn.hide();
 
 
@@ -52,10 +54,10 @@ $(document).ready(function() {
         $.post('/subjects/rest/salvar',
             getFields()
         ).success(function(success) {
-                table.append('<tr value="'+success["id"]+'"> <td>'+success["name"]+
-                '</td> <td>' +success["activities"]+ '</td>'+
-                '</td><td> <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px"> <i class="glyphicon glyphicon-pencil"></i></a>'+
-                '</td> <td> <button class="btn btn-danger" value="'+success["id"]+'" style="margin-left: 10px"> <i class="glyphicon glyphicon-trash"></i> </button> </td>');
+                //table.append('<tr value="'+success["id"]+'"> <td>'+success["name"]+
+                //'</td> <td>' +success["activities"]+ '</td> <td>'+success["course"]+'</td>'+
+                //'</td><td> <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px"> <i class="glyphicon glyphicon-pencil"></i></a>'+
+                //'</td> <td> <button class="btn btn-danger" value="'+success["id"]+'" style="margin-left: 10px"> <i class="glyphicon glyphicon-trash"></i> </button> </td>');
                 clearAllFields();
             }).error(function(erro) {
                 for (propriedade in erro.responseJSON){
@@ -68,7 +70,10 @@ $(document).ready(function() {
             });
     });
 
+
     gerenciar.click(function(){
+        lst.fadeToggle();
+        records.fadeToggle();
         $(this).css({"color":"white"});
     });
 });

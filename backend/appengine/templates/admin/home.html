@@ -1,24 +1,24 @@
 {% extends 'admin/base.html' %}
 {% block body %}
-    </br>
-    </br>
-    </br>
-    </br>
-    </br>
     <div class="container">
         <div class="row">
-            <h1>{% trans %}Painel Administrativo{% endtrans %}</h1>
+            <h1 style="visibility: hidden">{% trans %}Painel Administrativo{% endtrans %}
             <ul>
                 <li>
                     <a href="{{ security_table_path }}">{% trans %}Tabela de Paths (Seguros e Inseguros){% endtrans %}</a>
                 </li>
             </ul>
+            </h1>
             </p>
-            <h2>{% trans %}Configurações Gerais{% endtrans %}</h2>
+            <br>
+            <h2>{% trans %}Painel Administrativo{% endtrans %}</h2>
             <ul>
+                <div style="font-size: large">
                 <li><a href="/acourses">Gerenciamento de Cursos</a></li>
                 <li><a href="/subjects">Gerenciamento de Matérias</a></li>
-                <li><a href="/articles">Gerenciamento de Artigos</a></li>
+                <li><a href="/articles">Gerenciamento de Artigos</a></li></div>
+                <br> <br>
+
                 <li><a href="{{ permission_admin_path }}">{% trans %}Permissões de Usuário{% endtrans %}</a></li>
                 <li><a href="{{ facebook_admin_path }}">{% trans %}Facebook{% endtrans %}</a></li>
                 <li><a href="{{ passwordless_admin_path }}">{% trans %}Passwordless{% endtrans %}</a></li>

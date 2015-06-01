@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
+import json
 
 from google.appengine.ext import ndb
 from config.template_middleware import TemplateResponse
-from course.course_model import Course, Subject
+from course.course_model import Course, Subject, CourseForm
 from gaecookie.decorator import no_csrf
 from gaepermission.decorator import permissions, login_not_required
 from permission_app.model import ADMIN
 from routes.acourses import edit
+from routes.acourses import rest
 from routes.acourses.new import salvar
 from tekton.gae.middleware.redirect import RedirectResponse
 from tekton.router import to_path
@@ -27,8 +29,16 @@ def index():
         key_id = key.id()
         course.edit_path = to_path(edit_path_base, key_id)
         course.deletar_path = to_path(deletar_path_base, key_id)
+
+    form = CourseForm()
+    localized_courses = [form.fill_with_model(course) for course in courses]
+    str_json = json.dumps(localized_courses)
+
+
+
     ctx = {'salvar_path': to_path(salvar),
-           'courses': courses}
+           'rest_del_path': to_path(rest.deletar),
+           'courses': str_json}
 
     return TemplateResponse(ctx, 'acourses/courses_home.html')
 

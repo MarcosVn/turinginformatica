@@ -10,7 +10,7 @@
                         {{ csrf_input() }}
                         {{ form_input('Nome','name','', '', 'text') }}
                         {{ form_input('Atividades','activities','', '', 'text') }}
-                        <label class="control-label">Cursos:&nbsp;&nbsp;</label>
+                        <label class="control-label">Curso:&nbsp;&nbsp;</label>
                         <select name="courses" style="margin-bottom: 50px;">
                             {% for course in courses %}
                                 <option value="{{ course.key.id() }}">{{ course.name }}</option>
@@ -19,19 +19,21 @@
 
                         <div align="center">
                             <button id="salvar" class="btn btn-log">Criar</button>
-
-                            <h3>Lista de Matérias {{ 'do curso '+course_selecionado.name if course_selecionado}} </h3>
-                            <form action="{{ pesquisa_path }}" style="margin-bottom: 100px">
+                            <button id="gerenciar" class="btn btn-log">Esconder/Mostrar Consulta</button>
+                            <div id="lst">
+                            <h3 style="margin-top:50px">Lista de Matérias {{ 'do curso '+course_selecionado.name if course_selecionado}} </h3>
+                            <form action="{{ pesquisa_path }}">
                                <select name="course_selecionado">
                                    {% for course in courses %}
                                        <option value="{{ course.key.id() }}" {{ 'selected="selected"' | safe if course == course_selecionado }}>{{ course.name }}</option>
                                    {% endfor %}
 
                                </select>
-                               <button id="gerenciar" type="submit" class="btn btn-log">Pesquisar</button>
+                               <button id="pesq" type="submit" class="btn btn-log">Pesquisar</button>
                             </form>
                             <img id="ajax-save-gif" src="/static/img/ajax.gif" />
-                        </div>
+                            </div>
+                            </div>
                     </div>
 
                     <br><br>
@@ -49,6 +51,7 @@
                                 <tr value="{{ s.key.id() }}">
                                 <td> {{ s.name }} </td>
                                 <td> {{ s.activities }} </td>
+                                <td> {{ s.course.id() }}</td>
                                 <td>
                                     <a class="btn btn-success" href="{{ s.edit_path }}" style="background: #10698F !important; margin-left: 10px">
                                         <i class="glyphicon glyphicon-pencil"></i>
