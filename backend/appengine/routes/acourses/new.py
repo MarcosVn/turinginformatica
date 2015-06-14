@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import absolute_import, unicode_literals
-from google.appengine.ext import ndb
-from course.course_model import Course, CourseForm, Subject
+from course.course_model import Course, CourseForm
 from config.template_middleware import TemplateResponse
 from gaepermission.decorator import login_not_required
 from routes import acourses
@@ -12,20 +11,16 @@ __author__ = 'marcos'
 
 @login_not_required
 def salvar(**kwargs):
-    kwargs['subjects'] = ndb.Key(Subject, int(kwargs['subjects']))
     form = CourseForm(**kwargs)
-    # erros = form.validate()
-    # if erros:
-    #     return
+    erros = form.validate()
+    if not erros:
+        properties = form.normalize()
+        course = Course(**properties)
+        course.put()
+        return RedirectResponse(acourses)
 
-    # course.put()
-    # kwargs = form.normalize()
+    else:
+        ctx = {'courses': kwargs, 'erros': erros}
+        return TemplateResponse(ctx, 'acourses/courses_home.html')
 
-    course = form.fill_model()
-    course = Course(**kwargs)
-    course.put()
-        # return RedirectResponse(acourses)
 
-    # else:
-    #     ctx = {'courses': kwargs, 'erros': erros}
-    return RedirectResponse(acourses)
