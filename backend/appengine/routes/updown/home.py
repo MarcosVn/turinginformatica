@@ -8,6 +8,7 @@ from google.appengine.ext.blobstore import blobstore
 from blob_app import blob_facade
 from config.template_middleware import TemplateResponse
 from gaecookie.decorator import no_csrf
+from gaepermission.decorator import login_required
 from routes.updown import upload
 from tekton import router
 from tekton.gae.middleware.redirect import RedirectResponse
@@ -17,6 +18,7 @@ __author__ = 'marcos'
 
 
 @no_csrf
+@login_required
 def index(_logged_user):
     success_url = router.to_path(upload)
     bucket = get_default_gcs_bucket_name()
@@ -42,6 +44,9 @@ def index(_logged_user):
 
     return TemplateResponse(ctx, 'updown/home.html')
 
+
+@no_csrf
+@login_required
 def delete(blob_key):
     blob_facade.delete_blob_file_cmd(blob_key).execute()
     return RedirectResponse(index)
